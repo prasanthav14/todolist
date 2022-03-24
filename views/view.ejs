@@ -1,0 +1,46 @@
+<%- include("header")-%>
+
+
+    <div>
+        <h2 style="text-align: left;">
+            <%=disp%>
+        </h2>
+        <br>
+    </div>
+    <form action="/" method="post" class="d-flex justify-content-center align-items-center mb-4">
+        <div class="form-outline flex-fill">
+            <input type="text" value="" name="listname" class="form-control"
+                placeholder="Hey, Got any plans for today...?" />
+        </div>
+        <button type="submit" name="button1" class="btn button btn-primary ms-2" value=<%=flag %> >+</button>
+    </form>
+
+    <!-- Tabs content -->
+
+    <div class="tab-content" id="ex1-content">
+        <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+            <ul class="list-group mb-0">
+                <% displist.forEach((ele)=>{ %>
+                    <form action="/check" method="post">
+                        <li class="list-group-item d-flex align-items-center border-0 mb-2 rounded"
+                            style="background-color: #f4f6f7;">
+                            <input type="checkbox" class="form-check-input me-2" onclick="this.form.submit()"
+                                name="checkbox" value= <%= ele._id %> >
+                            <input type="hidden" name="listname" value="todo"> 
+                            <label for="checkbox" class="strikethrough" style="width: 35rem; text-align: justify;" >
+                                <%= ele.content %>
+                            </label>
+                        </li>
+                    </form>
+                    <% }) %>
+            </ul>
+        </div>
+    </div>
+    <form action="/clear" method="post">
+        <!-- Tabs content -->
+        <div style="display: -moz-inline-box; text-align: right;">
+            <button type="submit" name="button2" value=<%=flag %> class="btn btn-sm btn-danger">Clearlist</button>
+        </div>
+    </form>
+
+    <%- include("footer")-%>
